@@ -1,5 +1,6 @@
 package src
 
+<<<<<<< HEAD
 import (
 	"fmt"
 	"strings"
@@ -75,4 +76,7 @@ func getStatusText(code int) string {
 	default:
 		return "Unknown"
 	}
+=======
+type HttpResponse struct {
+>>>>>>> 9b2dcd4e58e15f4cde100f8bd0f9b2d3ce939485
 }
