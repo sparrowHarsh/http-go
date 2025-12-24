@@ -58,7 +58,10 @@ func (s *Server) ListenConnection() error {
 	/* Accept conncetion for multiple clients*/
 	for {
 		conn, err := listener.Accept()
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9b2dcd4e58e15f4cde100f8bd0f9b2d3ce939485
 		if err != nil {
 			select {
 			case <-s.ShutdownCtx.Done():
@@ -70,25 +73,55 @@ func (s *Server) ListenConnection() error {
 				continue
 			}
 		}
+<<<<<<< HEAD
+		// Now handle each connection in a seperate go routine
+		go s.HandleConnection(conn)
+=======
 
 		// Now handle each connection in a seperate go routine
 		s.HandleConnection(conn)
+>>>>>>> 9b2dcd4e58e15f4cde100f8bd0f9b2d3ce939485
 	}
 }
 
 // Function for handeling conencton
 func (s *Server) HandleConnection(conn net.Conn) error {
+<<<<<<< HEAD
+	s.cfg.Logger.Println("Handle connection function called")
+=======
 	s.cfg.Logger.Println("Handle connecton function called")
+>>>>>>> 9b2dcd4e58e15f4cde100f8bd0f9b2d3ce939485
 
 	// set read/write timeouts
 	conn.SetReadDeadline(time.Now().Add(s.cfg.ReadTimeout))
 	conn.SetWriteDeadline(time.Now().Add(s.cfg.WriteTimeout))
 	defer conn.Close()
 
+<<<<<<< HEAD
+	reader := bufio.NewReader(conn)
+
+	// Parse the complete HTTP request (headers + body)
+	request, err := ParseHttpRequest(reader)
+	if err != nil {
+		return fmt.Errorf("error parsing request: %w", err)
+	}
+
+	s.cfg.Logger.Printf("Method: %s, Path: %s, Version: %s", request.Method, request.Path, request.Version)
+	s.cfg.Logger.Printf("Headers: %v", request.Header)
+	s.cfg.Logger.Printf("Body: %s", request.Body)
+
+	// TODO: Route the request and send response
+	// Send a simple HTTP response
+	response := "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 2\r\n\r\nOK"
+	conn.Write([]byte(response))
+
+	return nil
+=======
 	// Read full HTTP request
 	reader := bufio.NewReader(conn)
 
 	for {
 
 	}
+>>>>>>> 9b2dcd4e58e15f4cde100f8bd0f9b2d3ce939485
 }
